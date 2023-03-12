@@ -1,7 +1,7 @@
 const express= require("express")
 const app= express()
 const router= require("./Route_model/Route")
-const errorHandler = require("./errorHandler/errorHandler");
+const errorHandler = require("./middleware/errorHandler/errorHandler");
 app.use(express.json())
 app.use(errorHandler)
 app.use(router)
