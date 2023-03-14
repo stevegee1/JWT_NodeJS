@@ -1,9 +1,12 @@
 const {CustomAPIError}=require("./customError")
-
-class unAuthorizedError extends CustomAPIError {
-  constructor(message, statusCode) {
-    super(message, statusCode);
+const {getStatusCode}= require("http-status-codes");
+class UnAuthorizedError extends Error {
+  constructor(message) {
+    super(message);
+    this.statusCode = getStatusCode("Unauthorized");
   }
 }
-
-module.exports=unAuthorizedError
+const creteCustomError = (msg) => {
+  return new UnAuthorizedError(msg);
+};
+module.exports={UnAuthorizedError, creteCustomError}
