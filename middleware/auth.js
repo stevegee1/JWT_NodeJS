@@ -1,5 +1,6 @@
 
 const JWT = require("jsonwebtoken");
+const AuthEror= require("../Errors/unAuthorizedError")
 require("dotenv").config();
 const loginAuth= (req,res,next)=>{
   const authHeader = req.headers.authorization;
@@ -12,7 +13,10 @@ const loginAuth= (req,res,next)=>{
     next()
     //res.status(200).json({ msg: `hello ${decoded.name}` });
   } catch (err) {
-    res.status(400).send("not allowed to view");
+    const authError= new AuthEror("invalid token", 404)
+    throw authError
+    //next(authError)
+    //res.status(400).send("not allowed to view");
   }
 
 }
